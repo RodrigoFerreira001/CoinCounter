@@ -40,36 +40,11 @@ cnts = cv2.findContours(img_e.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 #new coins collection
 coins = []
 
-#color
-c1_e = [0.0,0.0,0.0]
-c2_e = [0.0,0.0,0.0]
-c3_e = [0.0,0.0,0.0]
-c4_e = [0.0,0.0,0.0]
-
-c1_i = [0.0,0.0,0.0]
-c2_i = [0.0,0.0,0.0]
-c3_i = [0.0,0.0,0.0]
-c4_i = [0.0,0.0,0.0]
-
 for c in cnts:
 	((x, y), radius) = cv2.minEnclosingCircle(c)
 	x = int(x)
 	y = int(y)
 	co = coin(x,y,radius)
-	for j in range(3):
-		c1_e[j] = img_o.item(y,int(x - 0.78 * radius),j)
-		c2_e[j] = img_o.item(int(y + 0.88 * radius) ,x,j)
-		c3_e[j] = img_o.item(y,int(x + 0.88 * radius),j)
-		c4_e[j] = img_o.item(int(y - 0.88 * radius) ,x,j)
-
-		c1_i[j] = img_o.item(y,int(x - 0.42 * radius),j)
-		c2_i[j] = img_o.item(int(y + 0.42 * radius) ,x,j)
-		c3_i[j] = img_o.item(y,int(x + 0.42 * radius),j)
-		c4_i[j] = img_o.item(int(y - 0.42 * radius) ,x,j)
-
-		co.set_primary_color( (c1_e[j] + c2_e[j] + c3_e[j] + c4_e[j])/4 , j)
-		co.set_secundary_color( (c1_i[j] + c2_i[j] + c3_i[j] + c4_i[j])/4 , j)
-
 	coins.append(co)
 
 
